@@ -24,7 +24,7 @@ class Login(Resource):
 
         :returns: The instance of :class:`requests.Response`.
         """
-        data = {"email": username,
+        data = {"identifier": username,
                 "password": password}
 
         return self._post(data=data)
