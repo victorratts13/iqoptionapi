@@ -1,24 +1,30 @@
-"""Module for IQ Option http getprofile resource."""
+"""Module for IQ Option http login resource."""
 
 from iqoptionapi.http.resource import Resource
 
 
-class Getprofile(Resource):
-    """Class for IQ option getprofile resource."""
+class Login(Resource):
+    """Class for IQ option login resource."""
     # pylint: disable=too-few-public-methods
 
-    url = "getprofile"
+    url = "login"
 
-    def _get(self):
-        """Send get request for IQ Option API getprofile http resource.
-
-        :returns: The instance of :class:`requests.Response`.
-        """
-        return self.send_http_request("GET")
-
-    def __call__(self):
-        """Method to get IQ Option API getprofile http request.
+    def _post(self, data=None, headers=None):
+        """Send get request for IQ Option API login http resource.
 
         :returns: The instance of :class:`requests.Response`.
         """
-        return self._get()
+        return self.send_http_request("POST", data=data, headers=headers)
+
+    def __call__(self, username, password):
+        """Method to get IQ Option API login http request.
+
+        :param str username: The username of a IQ Option server.
+        :param str password: The password of a IQ Option server.
+
+        :returns: The instance of :class:`requests.Response`.
+        """
+        data = {"identifier": username,
+                "password": password}
+
+        return self._post(data=data)
